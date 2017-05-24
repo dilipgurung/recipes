@@ -1,16 +1,23 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It is a breeze. Simply tell Lumen the URIs it should respond to
-| and give it the Closure to call when that URI is requested.
-|
-*/
+$app->group(
+    [
+        'prefix' => 'api/v1',
+        'namespace' => '\Gousto\Http\Controllers',
+    ],
+    function () use ($app) {
+        /*
+        |--------------------------------------------------------------------------
+        | Recipe Routes
+        |--------------------------------------------------------------------------
+        |
+        | Available HTTP Methods are GET, POST, PUT, PATCH
+        |
+        */
+        $app->get('recipes', 'RecipeController@index');
+        $app->get('recipes/{id}', 'RecipeController@show');
+        $app->post('recipes', 'RecipeController@store');
+        $app->put('recipes/{id}', 'RecipeController@update');
+        $app->patch('recipes/{id}', 'RecipeController@patch');
 
-$app->get('/', function () use ($app) {
-    return response()->json(['msg' => 'hello world']);
-});
+    });
