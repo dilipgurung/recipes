@@ -4,7 +4,7 @@ namespace Gousto\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Recipe extends Model
+class Rating extends Model
 {
     /**
      * The attributes that are protected against mass assignment.
@@ -12,6 +12,8 @@ class Recipe extends Model
      * @var array
      */
     protected $guarded = ['id'];
+
+    protected $table = 'ratings';
 
     /**
      * Disable automatic mutation of date timestamp into a Carbon instance
@@ -24,10 +26,10 @@ class Recipe extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function ratings()
+    public function recipe()
     {
-        return $this->hasMany(Rating::class);
+        return $this->belongsTo(Recipe::class, 'recipe_id');
     }
 }

@@ -1,21 +1,53 @@
-# Lumen PHP Framework
+## Gousto Recipe API
+A sample Food recipe and ratings API built on [Lumen framework](https://lumen.laravel.com/).
 
-[![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
-[![Total Downloads](https://poser.pugx.org/laravel/lumen-framework/d/total.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/lumen-framework/v/stable.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/lumen-framework/v/unstable.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![License](https://poser.pugx.org/laravel/lumen-framework/license.svg)](https://packagist.org/packages/laravel/lumen-framework)
+### Requirements
+   - PHP >= 5.6
+   - [Composer](https://getcomposer.org/)
 
-Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
+## Installation Steps
 
-## Official Documentation
+#### Clone the repo
+```
+$ git clone github.com/dilipgurung/gousto
+```	
+  
+#### Update the configuration:
 
-Documentation for the framework can be found on the [Lumen website](http://lumen.laravel.com/docs).
+Update `DB_DATABASE` and other options in the `.env` file as needed.
 
-## Security Vulnerabilities
+#### Install Application dependencies
+```
+$ make install
+```
 
-If you discover a security vulnerability within Lumen, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+#### Migrate the Database
 
-## License
+Migrate the database and import the data from CSV file
 
-The Lumen framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+```
+$ make migrate
+$ make import
+```
+
+##### Note: 
+By default the command will import the data from `storage/app/gousto/datastore/recipe-data.csv`
+
+But you can import the data from any other file by overriding the file path with the `--path` option
+```
+$ php artisan ingest:data --path=/path/to/your/file.csv
+```
+
+#### Run the Application
+```
+$ make run
+```
+
+The application will run on http://localhost:8000
+
+### Run Tests
+To run the tests, run the following command in the terminal.
+   
+```
+$ make test
+```

@@ -8,11 +8,9 @@ interface Repository
 
     public function find($id);
 
-    public function findBy(array $criteria);
+    public function findBy(array $criteria, $limit = 10);
 
     public function create(array $data);
 
-    public function update(array $data);
-
-    public function save();
+    public function update($id, array $data);
 }

@@ -3,34 +3,34 @@
 namespace Gousto\Repositories;
 
 use Gousto\Contracts\Repository;
-use Gousto\Models\Recipe;
+use Gousto\Models\Rating;
 
-Class RecipeRepository implements Repository
+Class RatingRepository implements Repository
 {
 
     public function all()
     {
-        return Recipe::all();
+        return Rating::all();
     }
 
     public function find($id)
     {
-        return Recipe::findOrFail($id);
+        return Rating::findOrFail($id);
     }
 
     public function findBy(array $criteria, $limit = 10)
     {
-        return Recipe::where($criteria)->paginate($limit);
+        return Rating::where($criteria)->paginate($limit);
     }
 
     public function create(array $data)
     {
-        return Recipe::create($data);
+        return Rating::create($data);
     }
 
     public function update($id, array $data)
     {
-        $recipe = $this->find($id);
-        return $recipe->update($data);
+        $rating = $this->find($id);
+        return $rating->update($data);
     }
 }
