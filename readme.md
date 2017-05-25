@@ -9,17 +9,22 @@ A sample Food recipe and ratings API built on [Lumen framework](https://lumen.la
 
 #### Clone the repo
 ```
-$ git clone github.com/dilipgurung/gousto
+$ git clone git@github.com:dilipgurung/gousto.git
+$ cd gousto
 ```	
-  
-#### Update the configuration:
-
-Update `DB_DATABASE` and other options in the `.env` file as needed.
 
 #### Install Application dependencies
 ```
 $ make install
 ```
+
+#### Update the configuration:
+
+```
+$ cp .env.example .env
+```
+
+Update `DB_DATABASE` and other options in the `.env` file as needed.
 
 #### Migrate the Database
 
@@ -51,3 +56,16 @@ To run the tests, run the following command in the terminal.
 ```
 $ make test
 ```
+
+#### Why was Lumen chosen for the project?
+
+ - Lumen was chosen for this project mostly due to the author's familiarity and in-depth knowledge of the framework and honestly it is one of the most elegant PHP frameworks out there.
+
+#### Extensibility
+- The API is built as loosely coupled as posible.
+- Follows the SOLID design principles
+- The API uses [Fractal](http://fractal.thephpleague.com/) as a presentation and transformation layer. Data transformers are not tied to the underlying Data Layer so data could be presented in different ways based on different consumers. It also makes the API much more resilience to the underlying data changes.
+
+#### Trade-Offs:
+- Also I have tried to keep the codebase as simple as possible. In doing so, I have ommitted what would be trivial test cases
+- I have deliberately coded to the implementations on some places instead of using the interfaces and using the IoC container to inject it but doing so would lead to too may premature abstractions at this point.
