@@ -31,11 +31,11 @@ Class Handler extends BaseHandler
             ], 404);
         }
 
-        if ($e instanceof ValidationException) {
-            return response()->json([
-                'message' => 'Validation Failed'
-            ], 400);
-        }
+//        if ($e instanceof ValidationException) {
+//            return response()->json([
+//                'message' => 'Validation Failed'
+//            ], 400);
+//        }
 
         return parent::render($request, $e);
     }
