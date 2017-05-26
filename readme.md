@@ -151,7 +151,6 @@ Example: http://localhost:8000/api/v1/recipes
 Request body:
 
     {
-        "id": 1,
         "box_type": "vegetarian",
         "title": "Sweet Chilli and Lime Beef on a Crunchy Fresh Noodle Salad",
         "slug": "sweet-chilli-and-lime-beef-on-a-crunchy-fresh-noodle-salad",
@@ -248,8 +247,8 @@ $ make test
 #### Extensibility
 - The API is built as loosely coupled as posible.
 - Follows the SOLID design principles
-- The API uses [Fractal](http://fractal.thephpleague.com/) as a presentation and transformation layer. Data transformers are not tied to the underlying Data Layer so data could be presented in different ways based on different consumers. It also makes the API much more resilience to the underlying data changes.
+- The API uses [Fractal](http://fractal.thephpleague.com/) as a presentation and transformation layer. Data transformers are not tied to the underlying Data Layer so data could be presented in different ways based on different consumers. It also makes the API much more resilient to the underlying data changes.
 
 #### Trade-Offs:
-- Also I have tried to keep the codebase as simple as possible. In doing so, I have ommitted what would be trivial test cases
-- I have deliberately coded to the implementations on some places instead of using the interfaces and using the IoC container to inject it but doing so would lead to too may premature abstractions at this point.
+- Also I have tried to keep the codebase as simple as possible. In doing so, I have omitted what would be trivial test cases
+- I have deliberately coded to the implementations in some places instead of using the interfaces and using the IoC container to inject it but doing so in my opinion would lead to too much premature abstractions at this point.

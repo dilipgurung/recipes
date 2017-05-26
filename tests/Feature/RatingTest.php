@@ -22,7 +22,7 @@ class RatingTest extends TestCase
                  'recipe_id' => $recipe->id,
                  'rating' => $rating->rating
              ])
-             ->assertResponseStatus(Response::HTTP_OK);
+             ->assertResponseOk();
     }
 
     /**

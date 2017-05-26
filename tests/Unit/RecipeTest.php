@@ -7,7 +7,7 @@ class RecipeTest extends TestCase
     use DatabaseMigrations;
 
     /**
-     * @tests
+     * @test
      */
     public function a_recipe_has_ratings()
     {
