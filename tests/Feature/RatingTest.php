@@ -17,10 +17,10 @@ class RatingTest extends TestCase
         $recipe = factory(Gousto\Models\Recipe::class)->create();
         $rating = factory(Gousto\Models\Rating::class)->create(['recipe_id' => $recipe->id]);
 
-        $this->get('/api/v1/recipes/' . $recipe->id . '/ratings')
+        $this->get('/api/v1/recipes/'.$recipe->id.'/ratings')
              ->seeJsonContains([
-                 'recipe_id' => $recipe->id,
-                 'rating' => $rating->rating
+                 'recipe' => $recipe->title,
+                 'rating' => $rating->rating,
              ])
              ->assertResponseOk();
     }
@@ -34,13 +34,13 @@ class RatingTest extends TestCase
     {
         $recipe = factory(Gousto\Models\Recipe::class)->create();
 
-        $this->json('POST', '/api/v1/recipes/' . $recipe->id . '/ratings', ['rating' => 5])
+        $this->json('POST', '/api/v1/recipes/'.$recipe->id.'/ratings', ['rating' => 5])
              ->assertResponseStatus(Response::HTTP_CREATED);
 
-        $this->get('/api/v1/recipes/' . $recipe->id . '/ratings')
+        $this->get('/api/v1/recipes/'.$recipe->id.'/ratings')
              ->seeJson([
-                 'recipe_id' => $recipe->id,
-                 'rating' => 5
+                 'recipe' => $recipe->title,
+                 'rating' => 5,
              ]);
     }
 
@@ -53,7 +53,7 @@ class RatingTest extends TestCase
     {
         $recipe = factory(Gousto\Models\Recipe::class)->create();
 
-        $this->json('POST', '/api/v1/recipes/' . $recipe->id . '/ratings', [])
+        $this->json('POST', '/api/v1/recipes/'.$recipe->id.'/ratings', [])
              ->assertResponseStatus(Response::HTTP_BAD_REQUEST);
 
     }

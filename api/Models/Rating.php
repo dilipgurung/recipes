@@ -13,18 +13,6 @@ class Rating extends Model
      */
     protected $guarded = ['id'];
 
-    protected $table = 'ratings';
-
-    /**
-     * Disable automatic mutation of date timestamp into a Carbon instance
-     *
-     * @return array
-     */
-    public function getDates()
-    {
-        return [];
-    }
-
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

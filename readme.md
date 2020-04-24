@@ -2,53 +2,46 @@
 A sample Food recipe and ratings API built on [Lumen framework](https://lumen.laravel.com/).
 
 ### Requirements
-   - PHP >= 5.6
-   - [Composer](https://getcomposer.org/)
+   - [Docker](https://www.docker.com/get-started)
 
 ## Installation Steps
 
-#### Clone the repo
+#### Clone this repo
 ```
 $ git clone git@github.com:dilipgurung/gousto.git
 $ cd gousto
 ```	
 
-#### Install Application dependencies
+#### Start docker containers
 ```
-$ make install
+$ make up
+```	
+
+#### SSH into app container
 ```
+$ make ssh
+```	
 
-#### Update the configuration:
-
+> Command to run inside the container 👇
+#### Setup application
 ```
-$ cp .env.example .env
-```
-
-Update `DB_DATABASE` and other options in the `.env` file as needed.
-
-#### Migrate the Database
-
-Migrate the database and import the data from CSV file
-
-```
-$ make migrate
-$ make import
+$ make
 ```
 
-##### Note: 
-By default the command will import the data from `storage/app/gousto/datastore/recipe-data.csv`
-
-But you can import the data from any other file by overriding the file path with the `--path` option
+>### Run Tests
 ```
-$ php artisan ingest:data --path=/path/to/your/file.csv
+$ make test
 ```
 
-#### Run the Application
+#### Shutdown docker containers
 ```
-$ make run
-```
+$ make down
+```	
 
-The application will run on http://localhost:8000
+## API Reference
+
+### Base URL 
+	http://localhost:8000/api/v1
 
 ### API Resources
 - [GET /recipes](#get-recipes)
@@ -60,7 +53,7 @@ The application will run on http://localhost:8000
 
 
 ### GET /recipes
-Example: http://localhost:8000/api/v1/recipes
+Example: [http://localhost:8000/api/v1/recipes](http://localhost:8000/api/v1/recipes)
 
 Response body:
 
@@ -233,22 +226,4 @@ Request body:
         "rating":5
     }
 
-### Run Tests
-To run the tests, run the following command in the terminal.
-   
-```
-$ make test
-```
 
-#### Why was Lumen chosen for the project?
-
- - Lumen was chosen for this project mostly due to the author's familiarity and in-depth knowledge of the framework and honestly it is one of the most elegant PHP frameworks out there.
-
-#### Extensibility
-- The API is built as loosely coupled as posible.
-- Follows the SOLID design principles
-- The API uses [Fractal](http://fractal.thephpleague.com/) as a presentation and transformation layer. Data transformers are not tied to the underlying Data Layer so data could be presented in different ways based on different consumers. It also makes the API much more resilient to the underlying data changes.
-
-#### Trade-Offs:
-- Also I have tried to keep the codebase as simple as possible. In doing so, I have omitted what would be trivial test cases
-- I have deliberately coded to the implementations in some places instead of using the interfaces and using the IoC container to inject it but doing so in my opinion would lead to too much premature abstractions at this point.

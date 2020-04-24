@@ -10,7 +10,7 @@ class RecipeTransformer extends TransformerAbstract
     public function transform(Recipe $recipe)
     {
         return [
-            'id' => $recipe->id,
+            'recipe_id' => $recipe->id,
             'box_type' => $recipe->box_type,
             'title' => $recipe->title,
             'slug' => $recipe->slug,
@@ -34,8 +34,7 @@ class RecipeTransformer extends TransformerAbstract
             'recipe_cuisine' => $recipe->recipe_cuisine,
             'in_your_box' => $recipe->in_your_box,
             'gousto_reference' => $recipe->gousto_reference,
-            'created_at' => $recipe->created_at,
-            'updated_at' => $recipe->updated_at
+            'created' => $recipe->created_at->toFormattedDateString(),
         ];
     }
 }

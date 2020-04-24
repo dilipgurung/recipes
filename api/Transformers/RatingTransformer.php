@@ -15,17 +15,16 @@ class RatingTransformer extends TransformerAbstract
     /**
      * A Fractal transformer.
      *
-     * @param \Gousto\Models\Rating $rating
+     * @param  \Gousto\Models\Rating  $rating
      * @return array
      */
     public function transform(Rating $rating)
     {
         return [
-            'id' => $rating->id,
-            'recipe_id' => (int) $rating->recipe_id,
+            'rating_id' => $rating->id,
+            'recipe' => $rating->recipe->title,
             'rating' => (int) $rating->rating,
-            'created_at' => $rating->created_at,
-            'updated_at' => $rating->updated_at
+            'created_at' => $rating->created_at->toFormattedDateString(),
         ];
     }
 }

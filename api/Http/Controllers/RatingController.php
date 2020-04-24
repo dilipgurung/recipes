@@ -12,7 +12,6 @@ use Gousto\Validations\RatingValidation;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-
 class RatingController extends Controller
 {
     use Paginator;
@@ -40,10 +39,10 @@ class RatingController extends Controller
     /**
      * RatingController constructor.
      *
-     * @param \Gousto\Repositories\RecipeRepository $recipe
-     * @param \Gousto\Repositories\RatingRepository $rating
-     * @param \Gousto\Transformers\RatingTransformer $transformer
-     * @param \Gousto\Validations\RatingValidation $validation
+     * @param  \Gousto\Repositories\RecipeRepository  $recipe
+     * @param  \Gousto\Repositories\RatingRepository  $rating
+     * @param  \Gousto\Transformers\RatingTransformer  $transformer
+     * @param  \Gousto\Validations\RatingValidation  $validation
      */
     public function __construct(RecipeRepository $recipe, RatingRepository $rating, RatingTransformer $transformer, RatingValidation $validation)
     {
@@ -56,7 +55,7 @@ class RatingController extends Controller
     /**
      * Return all ratings
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function index(Request $request)
@@ -70,8 +69,8 @@ class RatingController extends Controller
     /**
      * Store a new Rating for a Recipe
      *
-     * @param \Illuminate\Http\Request $request
-     * @param int $recipeID
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $recipeID
      * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request, $recipeID)
@@ -82,7 +81,7 @@ class RatingController extends Controller
         $recipe->ratings()->save(new Rating($request->only('rating')));
 
         return response()->json([
-            'message' => 'Rating created successfully'
+            'message' => 'Rating created successfully',
         ], Response::HTTP_CREATED);
     }
 

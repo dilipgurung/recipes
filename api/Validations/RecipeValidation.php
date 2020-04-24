@@ -27,6 +27,6 @@ class RecipeValidation extends Validation
         'origin_country' => 'string',
         'recipe_cuisine' => 'required|string',
         'in_your_box' => 'string',
-        'gousto_reference' => 'required|integer'
+        'gousto_reference' => 'required|integer',
     ];
 }
