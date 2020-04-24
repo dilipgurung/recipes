@@ -13,7 +13,7 @@ class EndpointTest extends TestCase
     {
         $this->get('/api/v1/invalid-resource')
              ->seeJson([
-                 'message' => 'Requested Endpoint Not Found'
+                 'message' => 'Requested Endpoint Not Found',
              ])
              ->assertResponseStatus(Response::HTTP_NOT_FOUND);
     }

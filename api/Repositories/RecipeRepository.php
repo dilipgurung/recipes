@@ -5,7 +5,7 @@ namespace Gousto\Repositories;
 use Gousto\Contracts\Repository;
 use Gousto\Models\Recipe;
 
-Class RecipeRepository implements Repository
+class RecipeRepository implements Repository
 {
 
     public function all()

@@ -14,22 +14,24 @@ trait Paginator
 {
     /**
      * Items to show Per Page
+     *
      * @var int
      */
     protected $perPage = 10;
 
     /**
      * Exclude the following words from Request parameters
+     *
      * @var array
      */
     protected $excludes = [
         'page',
-        'per_page'
+        'per_page',
     ];
 
 
     /**
-     * @param \Illuminate\Contracts\Pagination\LengthAwarePaginator $items
+     * @param  \Illuminate\Contracts\Pagination\LengthAwarePaginator  $items
      * @return \Illuminate\Http\JsonResponse
      */
     public function paginate(LengthAwarePaginator $items)

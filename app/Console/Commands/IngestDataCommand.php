@@ -36,17 +36,16 @@ class IngestDataCommand extends Command
     protected $csvImportFilePath;
 
 
-
     /**
      * IngestDataCommand constructor.
      */
     public function __construct()
     {
-        $this->csvImportFilePath = realpath(storage_path(env('DATA_IMPORT_PATH', 'gousto/datastore/recipe-data.csv')));
+        $this->csvImportFilePath = realpath(storage_path(env('DATA_IMPORT_PATH', 'recipes/datastore/recipe-data.csv')));
 
         parent::__construct();
 
-        if (!ini_get("auto_detect_line_endings")) {
+        if (! ini_get("auto_detect_line_endings")) {
             ini_set("auto_detect_line_endings", '1');
         }
     }
@@ -104,7 +103,7 @@ class IngestDataCommand extends Command
     protected function getOptions()
     {
         return [
-            ['path', null, InputOption::VALUE_OPTIONAL, 'The CSV file path to import the data from', $this->csvImportFilePath]
+            ['path', null, InputOption::VALUE_OPTIONAL, 'The CSV file path to import the data from', $this->csvImportFilePath],
         ];
     }
 }

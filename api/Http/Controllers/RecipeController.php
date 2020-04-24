@@ -32,9 +32,9 @@ class RecipeController extends Controller
     /**
      * RecipeController constructor.
      *
-     * @param \Gousto\Repositories\RecipeRepository $recipe
-     * @param \Gousto\Transformers\RecipeTransformer $transformer
-     * @param \Gousto\Validations\RecipeValidation $validation
+     * @param  \Gousto\Repositories\RecipeRepository  $recipe
+     * @param  \Gousto\Transformers\RecipeTransformer  $transformer
+     * @param  \Gousto\Validations\RecipeValidation  $validation
      */
     public function __construct(RecipeRepository $recipe, RecipeTransformer $transformer, RecipeValidation $validation)
     {
@@ -46,7 +46,7 @@ class RecipeController extends Controller
     /**
      * Return all Recipes
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function index(Request $request)
@@ -72,7 +72,7 @@ class RecipeController extends Controller
     /**
      * Store a new Recipe in storage
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request)
@@ -81,15 +81,15 @@ class RecipeController extends Controller
 
         $this->recipe->create($request->all());
         return response()->json([
-            'message' => 'Recipe created successfully'
+            'message' => 'Recipe created successfully',
         ], Response::HTTP_CREATED);
     }
 
     /**
      * Partially Update a Recipe
      *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, $id)
@@ -104,12 +104,12 @@ class RecipeController extends Controller
 
         $status = $this->recipe->update($id, $request->all());
 
-        if (!$status) {
+        if (! $status) {
             return response()->json(['message' => 'Failed updating recipe'], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
         return response()->json([
-            'message' => 'Recipe updated successfully'
+            'message' => 'Recipe updated successfully',
         ], Response::HTTP_OK);
     }
 }
