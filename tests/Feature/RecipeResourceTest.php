@@ -35,7 +35,7 @@ class RecipeResourceTest extends TestCase
     {
         $recipe = factory(Gousto\Models\Recipe::class)->create();
 
-        $this->get('/api/v1/recipes/' . $recipe->id)
+        $this->get('/api/v1/recipes/'.$recipe->id)
              ->seeJson(['title' => $recipe->title])
              ->assertResponseOk();
     }
@@ -49,7 +49,7 @@ class RecipeResourceTest extends TestCase
     {
         $this->get('/api/v1/recipes/2')
              ->seeJson([
-                 'message' => 'Requested Model Not Found'
+                 'message' => 'Requested Model Not Found',
              ])
              ->assertResponseStatus(Response::HTTP_NOT_FOUND);
     }
@@ -70,7 +70,7 @@ class RecipeResourceTest extends TestCase
              ->seeJson([
                  'title' => $recipe->title,
                  'box_type' => $recipe->box_type,
-                 'recipe_cuisine' => $recipe->recipe_cuisine
+                 'recipe_cuisine' => $recipe->recipe_cuisine,
              ]);
     }
 
@@ -88,7 +88,7 @@ class RecipeResourceTest extends TestCase
 
         $updateFields = [
             'box_type' => 'gourmet',
-            'recipe_cuisine' => 'mexican'
+            'recipe_cuisine' => 'mexican',
         ];
         $this->json('PATCH', '/api/v1/recipes/1', $updateFields)
              ->assertResponseOk();

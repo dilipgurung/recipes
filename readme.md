@@ -1,54 +1,47 @@
-## Gousto Recipe API
-A sample Food recipe and ratings API built on [Lumen framework](https://lumen.laravel.com/).
+## Recipes API
+A sample Food recipe and ratings API built using [Lumen framework](https://lumen.laravel.com/).
 
 ### Requirements
-   - PHP >= 5.6
-   - [Composer](https://getcomposer.org/)
+   - [Docker](https://www.docker.com/get-started)
 
 ## Installation Steps
 
-#### Clone the repo
+#### Clone this repo
 ```
-$ git clone git@github.com:dilipgurung/gousto.git
-$ cd gousto
+$ git clone git@github.com:dilipgurung/recipes.git
+$ cd recipes
 ```	
 
-#### Install Application dependencies
+#### Run the application
 ```
-$ make install
+$ make up
+```	
+
+#### SSH into app container
 ```
+$ make ssh
+```	
 
-#### Update the configuration:
+> Commands to run inside the container 👇
+>#### Install dependencies, run DB migrations etc.
+>```
+>$ make
+>```
+>
+>#### Run Tests
+>```
+>$ make test
+>```
 
+#### Stop the application
 ```
-$ cp .env.example .env
-```
+$ make down
+```	
 
-Update `DB_DATABASE` and other options in the `.env` file as needed.
+## API Reference
 
-#### Migrate the Database
-
-Migrate the database and import the data from CSV file
-
-```
-$ make migrate
-$ make import
-```
-
-##### Note: 
-By default the command will import the data from `storage/app/gousto/datastore/recipe-data.csv`
-
-But you can import the data from any other file by overriding the file path with the `--path` option
-```
-$ php artisan ingest:data --path=/path/to/your/file.csv
-```
-
-#### Run the Application
-```
-$ make run
-```
-
-The application will run on http://localhost:8000
+### Base URL 
+	http://localhost:8000/api/v1
 
 ### API Resources
 - [GET /recipes](#get-recipes)
@@ -60,14 +53,14 @@ The application will run on http://localhost:8000
 
 
 ### GET /recipes
-Example: http://localhost:8000/api/v1/recipes
+Example: [http://localhost:8000/api/v1/recipes](http://localhost:8000/api/v1/recipes)
 
 Response body:
 
     {
         "data": [
             {
-                "id": 1,
+                "recipe_id": 1,
                 "box_type": "vegetarian",
                 "title": "Sweet Chilli and Lime Beef on a Crunchy Fresh Noodle Salad",
                 "slug": "sweet-chilli-and-lime-beef-on-a-crunchy-fresh-noodle-salad",
@@ -91,8 +84,7 @@ Response body:
                 "recipe_cuisine": "asian",
                 "in_your_box": "",
                 "gousto_reference": "59",
-                "created_at": "2017-05-25 12:03:58",
-                "updated_at": "2017-05-25 12:03:58"
+                "created_at": "May 25, 2017"
             }
         ],
         "meta": {
@@ -116,7 +108,7 @@ Response body:
 
     {
         "data": {
-            "id": 1,
+            "recipe_id": 1,
             "box_type": "vegetarian",
             "title": "Sweet Chilli and Lime Beef on a Crunchy Fresh Noodle Salad",
             "slug": "sweet-chilli-and-lime-beef-on-a-crunchy-fresh-noodle-salad",
@@ -140,8 +132,7 @@ Response body:
             "recipe_cuisine": "asian",
             "in_your_box": "",
             "gousto_reference": "59",
-            "created_at": "2017-05-25 12:03:58",
-            "updated_at": "2017-05-25 12:03:58"
+            "created_at": "May 25, 2017"
         }
     }
 
@@ -173,9 +164,7 @@ Request body:
         "origin_country": "Great Britain",
         "recipe_cuisine": "asian",
         "in_your_box": "",
-        "gousto_reference": "59",
-        "created_at": "2017-05-25 12:03:58",
-        "updated_at": "2017-05-25 12:03:58"
+        "gousto_reference": "59"
     }
 
 ### PATCH /recipes/[id]
@@ -198,18 +187,16 @@ Response body:
     {
         "data": [
             {
-                "id": 1,
-                "recipe_id": 1,
+                "rating_id": 1,
+                "recipe": "Sweet Chilli and Lime Beef on a Crunchy Fresh Noodle Salad",
                 "rating": 5,
-                "created_at": "2017-05-25 13:41:55",
-                "updated_at": "2017-05-25 13:41:55"
+                "created_at": "May 25, 2017"
             },
             {
-                "id": 2,
-                "recipe_id": 1,
+                "rating_id": 2,
+                "recipe": "Tamil Nadu Prawn Masala",
                 "rating": 5,
-                "created_at": "2017-05-25 13:41:57",
-                "updated_at": "2017-05-25 13:41:57"
+                "created_at": "May 25, 2017"
             }
         ],
         "meta": {
@@ -233,22 +220,4 @@ Request body:
         "rating":5
     }
 
-### Run Tests
-To run the tests, run the following command in the terminal.
-   
-```
-$ make test
-```
 
-#### Why was Lumen chosen for the project?
-
- - Lumen was chosen for this project mostly due to the author's familiarity and in-depth knowledge of the framework and honestly it is one of the most elegant PHP frameworks out there.
-
-#### Extensibility
-- The API is built as loosely coupled as posible.
-- Follows the SOLID design principles
-- The API uses [Fractal](http://fractal.thephpleague.com/) as a presentation and transformation layer. Data transformers are not tied to the underlying Data Layer so data could be presented in different ways based on different consumers. It also makes the API much more resilient to the underlying data changes.
-
-#### Trade-Offs:
-- Also I have tried to keep the codebase as simple as possible. In doing so, I have omitted what would be trivial test cases
-- I have deliberately coded to the implementations in some places instead of using the interfaces and using the IoC container to inject it but doing so in my opinion would lead to too much premature abstractions at this point.
