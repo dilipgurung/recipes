@@ -1,6 +1,12 @@
+APP_NAME=recipe_app
+
 # Commands to run inside the container
 .PHONY=all
-all: install migrate seed
+all: install migrate import
+
+.PHONY=build
+build: up
+	make shell CMD="-c make"
 
 .PHONY=install
 install: config db
@@ -41,7 +47,7 @@ test:
 # Commands to run outside the container
 .PHONY=up
 up:
-	docker-compose up -d
+	APP_NAME=$(APP_NAME) docker-compose up -d
 
 .PHONY=down
 down:
@@ -53,4 +59,8 @@ logs:
 
 .PHONY=ssh
 ssh:
-	docker-compose exec app bash
+	docker exec -it $(APP_NAME) bash
+
+# Example: make shell CMD="-c cp .env.example .env"
+shell:
+	docker exec -it $(APP_NAME) bash $(CMD)

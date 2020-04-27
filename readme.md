@@ -12,31 +12,23 @@ $ git clone git@github.com:dilipgurung/recipes.git
 $ cd recipes
 ```	
 
-#### Run the application
+#### Build and run the application
 ```
-$ make up
+$ make build
 ```	
-
-#### SSH into app container
-```
-$ make ssh
-```	
-
-> Commands to run inside the container 👇
->#### Install dependencies, run DB migrations etc.
->```
->$ make
->```
->
->#### Run Tests
->```
->$ make test
->```
+> Access the application on [http://localhost:8000/api/v1/recipes](http://localhost:8000/api/v1/recipes)
+ 
 
 #### Stop the application
 ```
 $ make down
 ```	
+
+#### Run Tests
+```
+$ make shell CMD="-c 'make test'"
+```
+
 
 ## API Reference
 
