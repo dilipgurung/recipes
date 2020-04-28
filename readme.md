@@ -18,17 +18,15 @@ $ make build
 ```	
 > Access the application on [http://localhost:8000/api/v1/recipes](http://localhost:8000/api/v1/recipes)
  
-
-#### Stop the application
-```
-$ make down
-```	
-
 #### Run Tests
 ```
 $ make shell CMD="-c 'make test'"
 ```
 
+#### Stop the application
+```
+$ make down
+```	
 
 ## API Reference
 
