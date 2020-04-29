@@ -1,66 +1,67 @@
 APP_NAME=recipe_app
 
 # Commands to run inside the container
-.PHONY=all
+.PHONY: all
 all: install migrate import
 
-.PHONY=build
+.PHONY: build
 build: up
 	make shell CMD="-c make"
 
-.PHONY=install
+.PHONY: install
 install: config db
 	composer install
 
-.PHONY=config
+.PHONY: config
 config:
 	cp .env.example .env
 
-.PHONY=db
+.PHONY: db
 db:
 	touch database/database.sqlite
 
-.PHONY=migrate
+.PHONY: migrate
 migrate:
 	php artisan migrate
 
-.PHONY=import
+.PHONY: import
 import:
 	php artisan ingest:data
 
-.PHONY=reset
+.PHONY: reset
 reset:
 	php artisan migrate:reset
 
-.PHONY=seed
+.PHONY: seed
 seed: import
 	php artisan db:seed
 
-.PHONY=run
+.PHONY: run
 run:
 	php artisan serve
 
-.PHONY=test
+.PHONY: test
 test:
 	./vendor/bin/phpunit
 
 # Commands to run outside the container
-.PHONY=up
+.PHONY: up
 up:
 	APP_NAME=$(APP_NAME) docker-compose up -d
 
-.PHONY=down
+.PHONY: down
 down:
 	docker-compose down
 
-.PHONY=logs
+.PHONY: logs
 logs:
 	docker-compose logs -f
 
-.PHONY=ssh
+.PHONY: ssh
 ssh:
 	docker exec -it $(APP_NAME) bash
 
 # Example: make shell CMD="-c cp .env.example .env"
+.PHONY: shell
 shell:
 	docker exec -it $(APP_NAME) bash $(CMD)
