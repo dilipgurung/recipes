@@ -2,7 +2,7 @@ APP_NAME=recipe_app
 
 # Commands to run inside the container
 .PHONY: all
-all: install migrate import
+all: install migrate import seed
 
 .PHONY: build
 build: up

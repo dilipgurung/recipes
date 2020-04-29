@@ -56,12 +56,14 @@ class RatingController extends Controller
      * Return all ratings
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param  int  $recipeId
      * @return \Illuminate\Http\JsonResponse
      */
-    public function index(Request $request)
+    public function index(Request $request, $recipeId)
     {
         $this->perPage = $request->get('per_page') ?: $this->perPage;
-        $ratings = $this->rating->findBy($request->except($this->excludes), $this->perPage);
+        $criteria = array_merge($request->except($this->excludes), ['recipe_id' => $recipeId]);
+        $ratings = $this->rating->findBy($criteria, $this->perPage);
 
         return $this->paginate($ratings);
     }
@@ -70,14 +72,14 @@ class RatingController extends Controller
      * Store a new Rating for a Recipe
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $recipeID
+     * @param  int  $recipeId
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request, $recipeID)
+    public function store(Request $request, $recipeId)
     {
         $this->validate($request, $this->validation->rules());
 
-        $recipe = $this->recipe->find($recipeID);
+        $recipe = $this->recipe->find($recipeId);
         $recipe->ratings()->save(new Rating($request->only('rating')));
 
         return response()->json([
